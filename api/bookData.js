@@ -1,19 +1,40 @@
-// import client from '../utils/client';
+import client from '../utils/client';
+
 // API CALLS FOR BOOKS
 
-// const endpoint = client.databaseURL;
+const endpoint = client.databaseURL;
 
 // TODO: GET BOOKS
-const getBooks = () => {};
+const getBooks = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/bokks.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
-// TODO: DELETE BOOK
-const deleteBook = () => {};
+// DELETE BOOK
+const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 // TODO: GET SINGLE BOOK
 const getSingleBook = () => {};
 
 // TODO: CREATE BOOK
-const createBook = (payload) => new Promise ((resolve, reject) => {
+const createBook = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books.json`, {
     method: 'POST',
     headers: {
@@ -21,11 +42,11 @@ const createBook = (payload) => new Promise ((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-  .then((response) => response.json())
-  .then((data) => resolve(data))
-  .catch(reject)
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
 });
-  
+
 // TODO: UPDATE BOOK
 const updateBook = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books/${payload.firebaseKey}.json`, {
@@ -35,13 +56,23 @@ const updateBook = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(payload),
   })
-  .then((response) => response.json())
-  .then((data) => resolve(data))
-  .catch(reject);
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
 });
 
 // TODO: FILTER BOOKS ON SALE
-const booksOnSale = () => {};
+const booksOnSale = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderby="sale"&equalTo=true`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // TODO: STRETCH...SEARCH BOOKS
 
