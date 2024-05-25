@@ -3,6 +3,7 @@ import { showBooks } from '../pages/books';
 import addBookForm from '../components/forms/addBookForm';
 import getBookDetails from '../api/mergedData';
 import viewBook from '../pages/viewBook';
+import addAuthorForm from '../components/forms/addAuthorForm';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -10,7 +11,7 @@ const domEvents = () => {
     if (e.target.id.includes('delete-book')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
-        console.warn('CLICKED DELETE BOOK', e.target.id);
+        // console.warn('CLICKED DELETE BOOK', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
         // console.warn(e.target.id.split('--'));
         deleteBook(firebaseKey).then(() => {
@@ -52,7 +53,8 @@ const domEvents = () => {
 
     // FIXME: ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('add-author-btn')) {
-      console.warn('ADD AUTHOR');
+      addAuthorForm();
+      // console.warn('ADD AUTHOR');
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
   });
