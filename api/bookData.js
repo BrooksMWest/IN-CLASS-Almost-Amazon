@@ -6,7 +6,7 @@ const endpoint = client.databaseURL;
 
 // TODO: GET BOOKS
 const getBooks = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/bokks.json`, {
+  fetch(`${endpoint}/books.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,17 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // TODO: GET SINGLE BOOK
-const getSingleBook = () => {};
+const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 
 // TODO: CREATE BOOK
 const createBook = (payload) => new Promise((resolve, reject) => {
@@ -63,7 +73,7 @@ const updateBook = (payload) => new Promise((resolve, reject) => {
 
 // TODO: FILTER BOOKS ON SALE
 const booksOnSale = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/books.json?orderby="sale"&equalTo=true`, {
+  fetch(`${endpoint}/books.json?orderBy="sale"&equalTo=true`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
