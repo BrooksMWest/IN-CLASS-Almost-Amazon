@@ -1,7 +1,7 @@
 import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
-
-const viewBook = (obj) => {
+// this page may need some serious reformatting especially the card to better fit author info.
+const viewAuthor = (obj) => {
   clearDom();
 
   const domString = `
@@ -9,8 +9,8 @@ const viewBook = (obj) => {
    <div class="d-flex flex-column">
      <img src=${obj.image} alt=${obj.title} style="width: 300px;">
      <div class="mt-5">
-       <i id="edit-book-btn--${obj.firebaseKey}" class="fas fa-edit btn btn-info">Edit</i>
-       <i id="delete-book--${obj.firebaseKey}" class="btn btn-danger fas fa-trash-alt">Delete</i>
+       <i id="edit-author-btn--${obj.firebaseKey}" class="fas fa-edit btn btn-info"></i>
+       <i id="delete-author--${obj.firebaseKey}" class="btn btn-danger fas fa-trash-alt"></i>
      </div>
    </div>
    <div class="text-white ms-5 details">
@@ -26,4 +26,5 @@ const viewBook = (obj) => {
   renderToDOM('#view', domString);
 };
 
-export default viewBook;
+export default viewAuthor;
+// basically copied everything from getBooks and changed instances of book to author.
