@@ -18,8 +18,7 @@ const viewAuthor = (obj) => {
      Author Email: <a href="mailto:${obj.authorObject.email}">${obj.authorObject.email}</a>
      <p>${obj.description || ''}</p>
      <hr>
-     <p>${obj.sale ? `<span class="badge bg-info sale-badge"><i class="fa fa-bell" aria-hidden="true"></i> Sale</span> 
-       $${obj.price}` : `$${obj.price}`}</p>      
+     
       </div>
     </div>`;
 
