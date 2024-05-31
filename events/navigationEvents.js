@@ -1,7 +1,7 @@
 import { booksOnSale, getBooks } from '../api/bookData';
 import { signOut } from '../utils/auth';
 import { showBooks } from '../pages/books';
-import { getAuthors } from '../api/authorData';
+import { getAuthors, favoriteAuthors } from '../api/authorData';
 import { showAuthors } from '../pages/authors';
 
 const navigationEvents = () => {
@@ -29,7 +29,10 @@ const navigationEvents = () => {
     getAuthors().then(showAuthors);
     // console.warn('CLICKED AUTHORS');
   });
-
+  // event listener for showing favorite authors
+  document.querySelector('#favorite-authors').addEventListener('click', () => {
+    getAuthors().then(favoriteAuthors);
+  });
   // STRETCH: SEARCH
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();
