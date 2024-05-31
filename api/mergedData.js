@@ -1,5 +1,5 @@
 import { getSingleBook } from './bookData';
-import { getSingleAuthor } from './authorData';
+import { getAuthorBooks, getSingleAuthor } from './authorData';
 // for merged promises
 // TODO: Get data for viewBook
 const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
@@ -14,8 +14,10 @@ const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
 
 const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
   // GET SINGLE Author
-  getSingleAuthor(firebaseKey).then((authorObject) => { // returns single book object
-  // we nest this promise so that we can use the book object
+  getSingleAuthor(firebaseKey).then((authorObject) => {
+    getAuthorBooks(authorObject.author_id)
+      .then((bookObject) => resolve({ ...bookObject, authorObject })); // returns single book object
+    // we nest this promise so that we can use the book object getauthorBooks
     resolve({ ...authorObject });
   }).catch(reject);
   // GET AUTHOR
