@@ -4,7 +4,7 @@ import renderToDOM from '../utils/renderToDom';
 const viewAuthor = (item) => {
   clearDom();
 
-  const domString = `
+  let domString = `
 
   <div class="card" style="width: 18rem;">
     <div class="card-body">
@@ -17,7 +17,21 @@ const viewAuthor = (item) => {
     </div>
   </div>
   `;
-
+  const authorBooks = item.bookArray;
+  authorBooks.forEach((thing) => {
+    domString += `
+      <div class="card">
+        <img class="card-img-top" src=${thing.image} alt=${thing.title} style="height: 400px;">
+        <div class="card-body" style="height: 180px;">
+          <h5 class="card-title">${thing.title}</h5>
+            <p class="card-text bold">${item.sale ? `<span class="badge badge-info sale-badge"><i class="fa fa-bell" aria-hidden="true"></i> Sale</span> $${thing.price}` : `$${thing.price}`}</p>
+            <hr>
+            <i class="btn btn-success fas fa-eye" id="view-book-btn--${thing.firebaseKey}">View</i>
+            <i id="edit-book-btn--${thing.firebaseKey}" class="fas fa-edit btn btn-info">Edit</i>
+            <i id="delete-book-btn--${thing.firebaseKey}" class="btn btn-danger fas fa-trash-alt">Delete</i>
+        </div>
+      </div>`;
+  });
   renderToDOM('#view', domString);
 };
 
